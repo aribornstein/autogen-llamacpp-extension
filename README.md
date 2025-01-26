@@ -20,6 +20,7 @@ pip install autogen-llama-cpp-chat-completion
 
 Once installed, you can integrate this extension into your AutoGen system for chat-based completions using the Llama-CPP model.
 
+
 ### Example Usage
 
 Here’s an example of how you can use the extension to create a chat session with Llama-CPP:
@@ -50,6 +51,39 @@ result = await client.create(messages)
 # Print the result
 print(result.content)
 ```
+
+### Phi-4 Model Example
+
+You can also use the `phi-4` model for chat completions. Here's an example of how to integrate it with the extension:
+
+```python
+from autogen_llama_cpp_chat_completion.llama_cpp_extension import LlamaCppChatCompletionClient
+from autogen_core.models import SystemMessage, UserMessage
+
+# Initialize the Phi-4 LlamaCpp client
+model_client = LlamaCppChatCompletionClient(
+    repo_id="unsloth/phi-4-GGUF",
+    filename="phi-4-Q2_K_L.gguf",
+    n_gpu_layers=-1,
+    seed=1337,
+    n_ctx=16384,
+    verbose=False,
+)
+
+# Create chat messages
+messages = [
+    SystemMessage(content="You are an assistant with the Phi-4 model."),
+    UserMessage(content="What is the latest breakthrough in AI research?")
+]
+
+# Get a response from the model
+result = await model_client.create(messages)
+
+# Print the result
+print(result.content)
+```
+
+This example demonstrates how to use the `phi-4` model, providing a larger context window (`n_ctx=16384`) and using the model from the `"unsloth/phi-4-GGUF"` repository.
 
 ### Streaming Mode
 
@@ -113,3 +147,5 @@ This extension is open source and available under the MIT License. See the [LICE
 - [AutoGen](https://github.com/microsoft/autogen)
 - [autogen-extension](https://github.com/topics/autogen-extension)
 - [Llama-CPP](https://github.com/facebook/llama-cpp)
+
+
