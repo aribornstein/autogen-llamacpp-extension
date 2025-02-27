@@ -27,6 +27,7 @@ Here’s an example of how you can use the extension to create a chat session wi
 
 ```python
 from autogen_llama_cpp_chat_completion.llama_cpp_extension import LlamaCppChatCompletionClient
+
 from autogen_core.models import SystemMessage, UserMessage
 
 # Initialize the LlamaCpp client
@@ -119,8 +120,10 @@ Tools should be passed as part of the `tools` argument when calling the `create`
 If you have a tool, such as a request validation tool, you can register it and the model will use it if necessary.
 
 ```python
+from autogen_core.tools import FunctionTool
+
 tools = [
-    Tool(name="validate_request", description="Validates request data")
+    FunctionTool(name="validate_request", description="Validates request data")
 ]
 
 result = await client.create(messages, tools=tools)
